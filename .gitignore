@@ -12,6 +12,7 @@ dist
 build
 
 # My configurations:
-phpmyadmin/*
+include/sqlman/*
 include/db.php
 !.gitignore
+*.zip

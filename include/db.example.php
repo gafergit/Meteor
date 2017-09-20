@@ -1,5 +1,5 @@
 <?php
-require  'medoo.php';
+require  'DBClass.php';
 use Medoo\Medoo;
 
 $database = new Medoo([

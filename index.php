@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!empty($_SESSION['uid'])){
-    echo '<script language=javascript>window.location.href="./app/"</script>'; 
+    echo '<script language=javascript>window.location.href="./dash/"</script>'; 
 }
 ?>
 <!DOCTYPE html>
@@ -50,9 +50,6 @@ if(!empty($_SESSION['uid'])){
                 </div>
             </div>
             <div class="navbar-translate">
-                <a class="navbar-brand" href="#" rel="tooltip" title="登陆管理系统，如需帮助请联系管理员。" data-placement="bottom" target="_blank">
-                    <div>南工社联社团管理系统</div>
-                </a>
                 <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
@@ -90,12 +87,21 @@ if(!empty($_SESSION['uid'])){
         <div class="container">
             <div class="col-md-4 content-center">
                 <div class="card card-login card-plain">
-                    <form class="form" method="post" action="./login.php">
+                    <form class="form" method="post" action="login.php">
                         <div class="header header-primary text-center">
                             <div class="logo-container">
                                 <img src="./assets/img/logo.png" alt="">
                             </div>
                         </div>
+                        <?php
+                                if(@$_GET['response'] == "error"){
+                                    echo("<a href='#' class='btn btn-danger'>用户名不存在或密码错误，请重新登陆！</a>");
+                                };
+                                if(@$_GET['response'] == "login"){
+                                    echo("<a href='#' class='btn btn-warning'>您还没有登陆，请先登陆！</a>");
+                                };
+                                ?> 
+                            </br>
                         <div class="content">
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
@@ -107,14 +113,13 @@ if(!empty($_SESSION['uid'])){
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
                                 </span>
-                                <input type="password" placeholder="密码" id="passwd" name="passwd" class="form-control" required/>                               
+                                <input type="password" placeholder="密码" id="passwd" name="passwd" class="form-control" required/>                              
                             </div>
-                            </br>
-                            <a class="link" style="font-size:14px" rel="tooltip" title="忘记密码请联系管理员" data-placement="bottom" target="_blank">忘记密码</a>
+                            <a class="btn btn-link" style="font-size:14px" rel="tooltip" title="忘记密码请联系管理员" data-placement="bottom" target="_blank">忘记密码</a>
                         </div>
                         <div class="footer text-center">
-                            <button type="submit" class="btn btn-info btn-round btn-lg btn-block"><i class="now-ui-icons ui-1_send"></i>&nbsp登陆</button>
-                            <button type="button" class="btn btn-warning btn-round btn-lg btn-block" onclick="location='./reg/'"><i class="fa fa-wpforms"></i>&nbsp申请注册社团</button>
+                            <button type="submit" class="btn btn-info btn-round btn-lg btn-block"><i class="now-ui-icons ui-1_send"></i>&nbsp登录</button>
+                            <button type="button" class="btn btn-danger btn-round btn-lg btn-block" onclick="location='./guest/'"><i class="fa fa-key"></i>&nbsp免登录功能</button>
                         </div>
                     </form>
                 </div>
@@ -147,7 +152,7 @@ if(!empty($_SESSION['uid'])){
                 Meteor &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, Created by
+                    </script>
                     <a> ASSN </a>.
                 </div>
             </div>
